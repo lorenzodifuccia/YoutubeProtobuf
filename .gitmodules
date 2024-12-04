@@ -1,0 +1,3 @@
+[submodule "blackboxprotobuf"]
+	path = blackboxprotobuf
+	url = https://github.com/nccgroup/blackboxprotobuf.git
