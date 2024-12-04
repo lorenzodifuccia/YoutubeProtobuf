@@ -13,16 +13,12 @@ def map_verbose_keys(json_res, proto_td):
                 if proto_field.get("name") == "":
                     proto_field["name"] = json_key
 
-                if "seen_repeated" in proto_field:
-                    if isinstance(json_obj, dict):
-                        recursive_map(json_value, proto_field["message_typedef"])
-
-                    elif isinstance(json_value, list):
-                        for item in json_value:
-                            recursive_map(item, proto_field["message_typedef"])
-
-                elif "message_typedef" in proto_field:
+                if isinstance(json_value, dict) and "message_typedef" in proto_field:
                     recursive_map(json_value, proto_field["message_typedef"])
+
+                elif isinstance(json_value, list) and "message_typedef" in proto_field:
+                    for item in json_value:
+                        recursive_map(item, proto_field["message_typedef"])
 
         elif isinstance(json_obj, list):  # Handle lists
             for item in json_obj:
